@@ -13,6 +13,7 @@ const fetchMovies = async () => {
       api_key: API_KEY,
     },
   });
+  console.log(data.results);
   return data.results;
 };
 
@@ -23,8 +24,19 @@ const searchMovies = async (query) => {
       query: query,
     },
   });
-  console.log(data.results)
+  console.log(data.results);
   return data.results;
+};
+
+const fetchGenres = async () => {
+  const { data } = await axios.get(`${BASE_URL}/genre/movie/list`, {
+    params: {
+      api_key: API_KEY,
+      language: 'en-US',
+    },
+  });
+  console.log(data.genres);
+  return data.genres;
 };
 
 export const MovieContext = createContext();
@@ -32,7 +44,7 @@ export const MovieContext = createContext();
 export const MovieProvider = ({ children }) => {
   return (
     <QueryClientProvider client={queryClient}>
-      <MovieContext.Provider value={{ fetchMovies, searchMovies }}>
+      <MovieContext.Provider value={{ fetchMovies, searchMovies, fetchGenres }}>
         {children}
       </MovieContext.Provider>
     </QueryClientProvider>

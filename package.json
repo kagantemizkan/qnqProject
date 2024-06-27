@@ -18,9 +18,12 @@
     "@mui/styles": "^5.15.20",
     "@tanstack/react-query": "^5.48.0",
     "axios": "^1.7.2",
+    "firebase": "^10.12.2",
+    "framer-motion": "^11.2.12",
+    "movie-trailer": "^3.2.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.23.1"
+    "react-router-dom": "^6.24.0"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",

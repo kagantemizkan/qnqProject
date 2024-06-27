@@ -14,7 +14,7 @@ import { useMovieContext } from '../../MovieContext.jsx';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import CircularProgress from '@mui/material/CircularProgress';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import QandQLogo from '../assets/qandq.svg';
 
 const StyledAutocomplete = styled(Autocomplete)(({ theme }) => ({
@@ -33,6 +33,19 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const [options, setOptions] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [isWideScreen, setIsWideScreen] = useState(window.innerWidth > 500); // Ekran genişliği kontrolü
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsWideScreen(window.innerWidth > 500);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -64,10 +77,20 @@ export default function Header() {
   };
 
   const handleOptionClick = (event, option) => {
-    console.log('Seçilen film ID:', option.id);
-    navigate(`/movie/${option.id}`)
+    console.log('Seçilen film ID:', option);
+    navigate(`/movie/${option.id}`, {
+      state: {
+        title: option.title,
+        imageUrl: option.poster_path,
+        releaseDate: option.release_date,
+        rating: option.vote_average,
+        description: option.overview,
+        genreIds: option.genre_ids,
+        originalLanguage: option.original_language,
+      }
+    });
   };
-
+  
   useEffect(() => {
     if (query.trim() !== '') {
       setLoading(true);
@@ -141,8 +164,9 @@ export default function Header() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <img src={QandQLogo} alt="QandQ Logo" />
+          {isWideScreen &&   <img style={{cursor: "pointer"}} onClick={()=> navigate("/")} src={QandQLogo} alt="QandQ Logo" />} 
           <StyledAutocomplete
+            className='w-[250px]'
             popupIcon={<SearchIcon />}
             sx={{
               "& .MuiAutocomplete-popupIndicator": { transform: "none" },

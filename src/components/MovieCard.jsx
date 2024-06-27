@@ -17,13 +17,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MovieCard = ({ title, description, imageUrl, releaseDate, rating, movieId }) => {
+const MovieCard = ({ title, imageUrl, releaseDate, rating, movieId, description, genreIds, originalLanguage }) => {
   const classes = useStyles();
   let navigate = useNavigate();
 
-  const handleCardClick = () => {
-    console.log(`Clicked on ${movieId}`);
-    navigate(`/movie/${movieId}`)
+  const handleCardClick = (event) => {
+    const rect = event.currentTarget.getBoundingClientRect(); 
+    const top = rect.top;
+    const left = rect.left;
+
+    navigate(`/movie/${movieId}`, {
+      state: { title, imageUrl, releaseDate, rating, description, genreIds, originalLanguage, top, left }
+    });
   };
 
   return (

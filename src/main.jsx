@@ -8,6 +8,7 @@ import MovieDetailsPage from './pages/MovieDetailsPage';
 import SearchPage from './pages/SearchPage';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { MovieProvider } from '../MovieContext.jsx';
+import { AnimatePresence } from 'framer-motion';
 
 const darkTheme = createTheme({
   palette: {
@@ -30,11 +31,11 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
     <MovieProvider>
-      <ThemeProvider theme={darkTheme}>
-        <RouterProvider router={router} />
-      </ThemeProvider>
+      <AnimatePresence mode="wait">
+        <ThemeProvider theme={darkTheme}>
+          <RouterProvider router={router} />
+        </ThemeProvider>
+      </AnimatePresence>
     </MovieProvider>
-  </React.StrictMode>
 );
