@@ -176,6 +176,8 @@ const MovieDetailsPage = () => {
                 </Button>
               </form>
               <div>
+                <Card className='p-5 mb-3 mt-3'>
+                <h1>Yorumlar: </h1>
                 {comments.map((comment, index) => (
                   <div key={index}>
                     <Typography variant='body2'>
@@ -183,6 +185,7 @@ const MovieDetailsPage = () => {
                     </Typography>
                   </div>
                 ))}
+                </Card>
               </div>
             </Grid>
           </Grid>
