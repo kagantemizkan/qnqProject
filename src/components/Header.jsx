@@ -199,6 +199,11 @@ export default function Header() {
                     </>
                   ),
                 }}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    navigate(`/search/${e.target.value}`);
+                  }
+                }}
               />
             )}
           />

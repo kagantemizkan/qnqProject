@@ -103,7 +103,6 @@ const MovieDetailsPage = () => {
               {title}
             </Typography>
           </Grid>
-
           <Grid container spacing={2} alignItems="flex-start">
             <Grid item xs={12} md={4}>
               <MotionDiv
@@ -129,7 +128,6 @@ const MovieDetailsPage = () => {
                 </Typography>
               )}
             </Grid>
-
 
             <Grid item xs={12}>
               <Card>
